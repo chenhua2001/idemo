@@ -69,8 +69,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
     @Override
     public Map<String, Object> getEmployeeIds(EmployeeQueryRequest request) {
         employeeMapper.selectList(null)
-                .stream()
-                .
+                .stream();
         return null;
     }
 

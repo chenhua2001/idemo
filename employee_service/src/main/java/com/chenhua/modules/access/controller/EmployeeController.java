@@ -69,7 +69,7 @@ public class EmployeeController {
     //查询员工信息，只返回符合条件的员工（id)和数量
     @GetMapping("/ids")
     public R getEmployeeIds(@RequestBody EmployeeQueryRequest request){
-
+        return null;
     }
 
 
