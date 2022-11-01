@@ -1,5 +1,7 @@
 package com.chenhua.modules.access.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chenhua.modules.access.domain.Employee;
@@ -8,8 +10,10 @@ import com.chenhua.modules.access.domain.request.EmployeeAddRequest;
 import com.chenhua.modules.access.domain.request.EmployeeQueryRequest;
 import com.chenhua.modules.access.domain.request.EmployeeUpdateRequest;
 import com.chenhua.modules.access.mapper.EmployeeMapper;
+import com.chenhua.modules.access.service.AccountClient;
 import com.chenhua.modules.access.service.EmployeeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chenhua.utils.R;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -33,7 +39,8 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
 
     @Autowired
     EmployeeMapper employeeMapper;
-
+    @Autowired
+    AccountClient accountClient;
     @Override
     public Long addEmployee(EmployeeAddRequest employeeInfo) {
         Employee employee = new Employee();
@@ -67,11 +74,25 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
     }
 
     @Override
-    public Map<String, Object> getEmployeeIds(EmployeeQueryRequest request) {
-        employeeMapper.selectList(null)
-                .stream();
-        return null;
+    public List<Long> getEmployeeAccounts(EmployeeQueryRequest request) {
+        Long id = request.getId();
+        Long departmentId = request.getDepartmentId();
+        Integer maxAge = request.getMaxAge();
+        Integer minAge = request.getMinAge();
+        String name = request.getName();
+        Boolean sex = request.getSex();
+        QueryWrapper<Employee> wrapper=new QueryWrapper<Employee>()
+                .select("id")
+                .eq(ObjectUtil.isNotNull(id),"id",id)
+                .eq(ObjectUtil.isNotNull(departmentId),"department_id",departmentId)
+                .le(ObjectUtil.isNotNull(maxAge),"age",maxAge)
+                .ge(ObjectUtil.isNotNull(minAge),"age",minAge)
+                .like(StrUtil.isNotBlank(name),"name",name)
+                .eq(ObjectUtil.isNotNull(sex),"sex",sex);
+        List<Long> accounts = employeeMapper.selectList(wrapper).stream()
+                .map(Employee::getId)
+                .map(accountClient::getAccountByEmployeeId)
+                .collect(Collectors.toList());
+        return accounts;
     }
-
-
 }

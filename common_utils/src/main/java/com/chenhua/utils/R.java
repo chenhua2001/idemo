@@ -1,6 +1,8 @@
-package com.chenhua.modules.access.utils;
+package com.chenhua.utils;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 
@@ -42,5 +44,36 @@ public class R {
         return this;
     }
 
+//    public boolean isSuccess() {
+//        return success;
+//    }
+//
+//    public void setSuccess(boolean success) {
+//        this.success = success;
+//    }
+//
+//    public Integer getCode() {
+//        return code;
+//    }
+//
+//    public void setCode(Integer code) {
+//        this.code = code;
+//    }
+//
+//    public String getMessage() {
+//        return message;
+//    }
+//
+//    public void setMessage(String message) {
+//        this.message = message;
+//    }
+//
+//    public void setData(HashMap<String, Object> data) {
+//        this.data = data;
+//    }
+//
+//    public HashMap<String, Object> getData() {
+//        return data;
+//    }
 }
 

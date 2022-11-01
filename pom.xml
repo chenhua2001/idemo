@@ -5,6 +5,7 @@
     <modules>
         <module>employee_service</module>
         <module>account_service</module>
+        <module>common_utils</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -28,6 +29,7 @@
         <json.version>20170516</json.version>
         <commons-dbutils.version>1.7</commons-dbutils.version>
         <hutool.version>5.5.0</hutool.version>
+        <openfeign.version>2.2.0.RELEASE</openfeign.version>
     </properties>
     <dependencyManagement>
 
@@ -44,7 +46,23 @@
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>2.2.0.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>0.2.2.RELEASE</version>
+            </dependency>
 
             <dependency>
                 <groupId>mysql</groupId>

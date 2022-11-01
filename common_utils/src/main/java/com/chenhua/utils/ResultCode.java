@@ -1,4 +1,4 @@
-package com.chenhua.modules.access.utils;
+package com.chenhua.utils;
 
 public enum ResultCode {
     //最基本

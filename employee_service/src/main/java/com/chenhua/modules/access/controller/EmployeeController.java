@@ -1,6 +1,7 @@
 package com.chenhua.modules.access.controller;
 
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.chenhua.modules.access.domain.Employee;
 import com.chenhua.modules.access.domain.info.EmployeeListInfo;
@@ -8,11 +9,12 @@ import com.chenhua.modules.access.domain.request.EmployeeAddRequest;
 import com.chenhua.modules.access.domain.request.EmployeeQueryRequest;
 import com.chenhua.modules.access.domain.request.EmployeeUpdateRequest;
 import com.chenhua.modules.access.service.EmployeeService;
-import com.chenhua.modules.access.utils.R;
+import com.chenhua.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -66,10 +68,14 @@ public class EmployeeController {
                 .data("total",employeeInfoList.getTotal())
                 .data("pages",employeeInfoList.getPages());
     }
-    //查询员工信息，只返回符合条件的员工（id)和数量
-    @GetMapping("/ids")
+    //查询员工信息，只返回符合条件的员工的账号
+    @GetMapping("/accounts")
     public R getEmployeeIds(@RequestBody EmployeeQueryRequest request){
-        return null;
+        List<Long> employeeAccounts = employeeService.getEmployeeAccounts(request);
+        return ObjectUtil.isNotEmpty(employeeAccounts)? R.ok()
+                .message("成功获取账户信息")
+                .data("accounts",employeeAccounts) :R.error()
+                .message("没有获取到信息");
     }
 
 

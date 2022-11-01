@@ -6,7 +6,9 @@ import com.chenhua.modules.access.domain.Employee;
 import com.chenhua.modules.access.domain.info.EmployeeListInfo;
 import com.chenhua.modules.access.domain.request.EmployeeQueryRequest;
 import com.chenhua.modules.access.mapper.EmployeeMapper;
+import com.chenhua.modules.access.service.AccountClient;
 import com.chenhua.modules.access.service.EmployeeService;
+import com.chenhua.utils.R;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class ITest {
     EmployeeService employeeService;
     @Autowired
     EmployeeMapper employeeMapper;
+    @Autowired
+    AccountClient accountClient;
     @Test
     public void testGet(){
         Employee one = employeeService.getOne(null);
@@ -41,4 +45,11 @@ public class ITest {
         IPage<EmployeeListInfo> employeeListInfoIPage = employeeMapper.listEmployees(employeeListInfoPage, employeeQueryRequest);
         System.out.println(employeeListInfoIPage);
     }
+    @Test
+    public void testClient(){
+
+        Long accountByEmployeeId = accountClient.getAccountByEmployeeId(1586568585604509697L);
+        System.out.println(accountByEmployeeId);
+    }
+
 }

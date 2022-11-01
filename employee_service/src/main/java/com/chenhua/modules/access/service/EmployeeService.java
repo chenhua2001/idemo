@@ -8,6 +8,7 @@ import com.chenhua.modules.access.domain.request.EmployeeAddRequest;
 import com.chenhua.modules.access.domain.request.EmployeeQueryRequest;
 import com.chenhua.modules.access.domain.request.EmployeeUpdateRequest;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,5 +24,5 @@ public interface EmployeeService extends IService<Employee> {
     public boolean removeEmployee(Long id);
     public boolean updateEmployeeById(EmployeeUpdateRequest employeeInfo);
     public Page<EmployeeListInfo> getEmployeeInfoList(EmployeeQueryRequest request, Long current, Long limit);
-    public Map<String,Object> getEmployeeIds(EmployeeQueryRequest request);
+    public List<Long> getEmployeeAccounts(EmployeeQueryRequest request);
 }
