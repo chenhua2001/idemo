@@ -30,6 +30,7 @@
         <commons-dbutils.version>1.7</commons-dbutils.version>
         <hutool.version>5.5.0</hutool.version>
         <openfeign.version>2.2.0.RELEASE</openfeign.version>
+        <swagger.version>2.7.0</swagger.version>
     </properties>
     <dependencyManagement>
 
@@ -73,6 +74,18 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <!--swagger-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!--swagger ui-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
         </dependencies>
 

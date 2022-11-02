@@ -1,8 +1,7 @@
 package com.chenhua.modules;
 
-import com.chenhua.modules.access.domain.Account;
-import com.chenhua.modules.access.domain.request.AccountAddRequest;
-import com.chenhua.modules.access.service.AccountService;
+import com.chenhua.modules.account.domain.request.AccountAddRequest;
+import com.chenhua.modules.account.service.AccountService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
